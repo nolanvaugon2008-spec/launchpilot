@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b1020">
+<title>LaunchPilot — Business Command Center</title>
+<style>
+:root{--bg:#090e1c;--panel:#111a2e;--panel2:#17223a;--line:#263451;--text:#f4f6ff;--muted:#9aa8c3;--purple:#8b75ff;--cyan:#61d9e8;--green:#54d6a0}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 80% -10%,#292052 0,transparent 35%),var(--bg);color:var(--text);font:15px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.wrap{max-width:1050px;margin:auto;padding:18px 15px 100px}.top{display:flex;align-items:center;justify-content:space-between;padding:9px 0 24px}.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px}.logo{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,#927cff,#5c48d9);display:grid;place-items:center;font-size:20px;box-shadow:0 8px 25px #6854db55}.pill{border:1px solid #345d55;background:#123329;color:#8ce8bd;border-radius:99px;padding:6px 10px;font-size:11px;font-weight:700}
+.hero{padding:25px 0 20px}.eyebrow{color:#b7aaff;text-transform:uppercase;letter-spacing:2px;font-size:10px;font-weight:800}.hero h1{font-size:clamp(32px,8vw,52px);line-height:1.04;margin:12px 0}.grad{background:linear-gradient(90deg,#fff,#b9aaff,#6bd8e7);-webkit-background-clip:text;background-clip:text;color:transparent}.hero p{color:var(--muted);line-height:1.6;max-width:620px;margin:0}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:20px 0}.stat,.card{background:linear-gradient(145deg,#141f36,#10182a);border:1px solid var(--line);border-radius:17px;padding:15px}.stat small{color:var(--muted)}.stat strong{display:block;font-size:23px;margin-top:7px}
+.nav{display:flex;gap:8px;overflow:auto;padding:8px 0 15px;position:sticky;top:0;background:#090e1ceF;z-index:5;scrollbar-width:none}.nav button{white-space:nowrap;border:1px solid var(--line);background:#111a2e;color:#b8c3d9;border-radius:12px;padding:10px 13px;font-weight:650}.nav button.active{background:#6d5be5;border-color:#8b75ff;color:white}
+.section{display:none}.section.active{display:block}.heading{margin:12px 0 14px}.heading h2{font-size:23px;margin:0 0 5px}.heading p{color:var(--muted);margin:0;line-height:1.5}
+.grid{display:grid;grid-template-columns:1fr;gap:12px}.card h3{margin:0 0 7px;font-size:17px}.card p{color:var(--muted);line-height:1.5;margin:0 0 12px}.field{margin:12px 0}.field label{display:block;color:#bdc8dc;font-size:13px;margin-bottom:7px}input,select,textarea{width:100%;background:#0b1324;border:1px solid #31415f;color:white;border-radius:11px;padding:12px;font:inherit;outline:none}textarea{min-height:100px;resize:vertical}input:focus,select:focus,textarea:focus{border-color:var(--purple)}
+.btn{border:0;border-radius:11px;padding:12px 15px;background:linear-gradient(100deg,#7763ed,#5e55c9);color:white;font-weight:750;font-size:14px;width:100%;cursor:pointer}.btn.secondary{background:#202d49;border:1px solid #344566}.result{margin-top:13px;background:#0b1426;border:1px solid #31415f;border-radius:12px;padding:13px;line-height:1.6;white-space:pre-wrap}.muted{color:var(--muted);font-size:12px}.idea{padding:13px;border:1px solid #2b3a58;border-radius:13px;margin:9px 0;background:#0d1729}.idea b{display:block;margin-bottom:5px}.money{font-size:28px;font-weight:800;color:#8de5bd}.footer{margin-top:30px;padding:18px 0;border-top:1px solid var(--line);color:var(--muted);font-size:12px;line-height:1.6}
+.check{display:flex;gap:10px;align-items:flex-start;padding:11px;border-bottom:1px solid #25334d}.check input{width:18px;margin-top:2px;accent-color:#8b75ff}.check span{line-height:1.4}.progress{height:8px;background:#26334c;border-radius:20px;overflow:hidden;margin:12px 0}.progress i{display:block;height:100%;background:linear-gradient(90deg,#8b75ff,#61d9e8);width:0}
+@media(min-width:700px){.wrap{padding:26px 25px 60px}.stats{grid-template-columns:repeat(4,1fr)}.grid{grid-template-columns:repeat(2,1fr)}.nav{position:static;background:transparent}.hero{padding-top:40px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top"><div class="brand"><div class="logo">✦</div>LaunchPilot</div><span class="pill">MVP • GRATUIT</span></header>
+<section class="hero"><div class="eyebrow">Your online business copilot</div><h1>Construis ton prochain<br><span class="grad">business en ligne.</span></h1><p>Les outils essentiels pour passer de l'idée au lancement : explore des pistes, calcule tes marges, prépare ton marketing et organise tes prochaines étapes.</p></section>
+<div class="stats">
+<div class="stat"><small>Projets suivis</small><strong id="projectCount">0</strong></div>
+<div class="stat"><small>Étapes terminées</small><strong id="doneCount">0</strong></div>
+<div class="stat"><small>Objectif de ventes</small><strong id="salesGoal">10</strong></div>
+<div class="stat"><small>Version</small><strong style="font-size:17px">Starter</strong></div>
+</div>
+<nav class="nav">
+<button class="active" data-tab="home">Accueil</button><button data-tab="ideas">Idées business</button><button data-tab="profit">Rentabilité</button><button data-tab="marketing">Marketing</button><button data-tab="planner">Plan de lancement</button>
+</nav>
+<section id="home" class="section active">
+<div class="heading"><h2>Ton espace de travail</h2><p>Avance une étape à la fois. Tes données de démonstration sont enregistrées sur cet appareil.</p></div>
+<div class="grid">
+<div class="card"><h3>💡 Trouve une idée</h3><p>Explore des modèles de business adaptés à ton profil et à tes moyens.</p><button class="btn" onclick="showTab('ideas')">Explorer les idées</button></div>
+<div class="card"><h3>📊 Calcule tes marges</h3><p>Estime le chiffre d'affaires et la marge avant les autres charges.</p><button class="btn" onclick="showTab('profit')">Ouvrir le calculateur</button></div>
+<div class="card"><h3>✍️ Prépare ton marketing</h3><p>Structure une publication claire pour présenter ton offre.</p><button class="btn" onclick="showTab('marketing')">Créer un contenu</button></div>
+<div class="card"><h3>🚀 Organise ton lancement</h3><p>Découpe ton projet en petites actions concrètes.</p><button class="btn" onclick="showTab('planner')">Voir mon plan</button></div>
+</div>
+</section>
+<section id="ideas" class="section">
+<div class="heading"><h2>Business Idea Finder</h2><p>Des pistes à étudier, pas des promesses de revenus. Vérifie toujours la demande avant d'investir.</p></div>
+<div class="card"><div class="field"><label>Quel domaine t'intéresse ?</label><select id="sector"><option value="all">Tous les domaines</option><option value="digital">Produits numériques</option><option value="service">Services et freelance</option><option value="commerce">E-commerce</option><option value="saas">Logiciels et SaaS</option><option value="content">Création de contenu</option></select></div><button class="btn" onclick="ideas()">Afficher des idées</button><div id="ideasResult" class="result">Choisis un domaine puis affiche les pistes.</div></div>
+</section>
+<section id="profit" class="section">
+<div class="heading"><h2>Profit Calculator</h2><p>Estime les résultats d'un scénario de vente. Les frais fixes, taxes et cotisations ne sont pas inclus.</p></div>
+<div class="card">
+<div class="grid">
+<div class="field"><label>Prix de vente (€)</label><input id="price" type="number" min="0" step=".01" value="49"></div>
+<div class="field"><label>Coût variable par vente (€)</label><input id="cost" type="number" min="0" step=".01" value="12"></div>
+<div class="field"><label>Nombre de ventes</label><input id="quantity" type="number" min="0" step="1" value="50"></div>
+<div class="field"><label>Frais fixes estimés (€)</label><input id="fixed" type="number" min="0" step=".01" value="0"></div>
+</div>
+<button class="btn" onclick="calculate()">Calculer mon scénario</button>
+<div id="profitResult" class="result" aria-live="polite">Renseigne tes hypothèses puis lance le calcul.</div>
+</div>
+</section>
+<section id="marketing" class="section">
+<div class="heading"><h2>Marketing Studio</h2><p>Crée une base de publication à personnaliser. Cet outil fonctionne sans API IA.</p></div>
+<div class="card">
+<div class="field"><label>Ton produit ou service</label><input id="offer" placeholder="Ex. : modèles Notion pour étudiants"></div>
+<div class="field"><label>Ton public cible</label><input id="audience" placeholder="Ex. : étudiants débordés"></div>
+<div class="field"><label>Le bénéfice principal</label><input id="benefit" placeholder="Ex. : mieux organiser leur semaine"></div>
+<div class="field"><label>Plateforme</label><select id="platform"><option>Instagram</option><option>TikTok</option><option>LinkedIn</option><option>Facebook</option></select></div>
+<button class="btn" onclick="makePost()">Créer une proposition</button>
+<div id="postResult" class="result" aria-live="polite">Complète les champs pour préparer ta publication.</div>
+<button class="btn secondary" style="margin-top:9px" onclick="copyPost()">Copier le texte</button>
+</div>
+</section>
+<section id="planner" class="section">
+<div class="heading"><h2>Launch Planner</h2><p>Une checklist simple pour transformer ton idée en projet testable.</p></div>
+<div class="card">
+<div style="display:flex;justify-content:space-between;align-items:center"><b>Progression du lancement</b><b id="progressText">0%</b></div><div class="progress"><i id="progressBar"></i></div>
+<div id="tasks">
+<label class="check"><input type="checkbox"><span>Définir le problème que je veux résoudre</span></label>
+<label class="check"><input type="checkbox"><span>Décrire mon client idéal</span></label>
+<label class="check"><input type="checkbox"><span>Parler à 5 clients potentiels</span></label>
+<label class="check"><input type="checkbox"><span>Étudier 3 concurrents</span></label>
+<label class="check"><input type="checkbox"><span>Définir une offre et son prix</span></label>
+<label class="check"><input type="checkbox"><span>Créer une page de présentation</span></label>
+<label class="check"><input type="checkbox"><span>Obtenir les premiers retours</span></label>
+</div><button class="btn secondary" style="margin-top:13px" onclick="resetTasks()">Réinitialiser la checklist</button>
+</div>
+</section>
+<footer class="footer">LaunchPilot est un prototype indépendant. Les outils de cette version fonctionnent localement dans ton navigateur. Il n'y a pas encore de comptes en ligne, de synchronisation entre appareils, d'IA connectée ni de paiements. Les résultats financiers sont des estimations, pas des conseils financiers.</footer>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+function showTab(id){document.querySelectorAll('.section').forEach(s=>s.classList.toggle('active',s.id===id));document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.tab===id));window.scrollTo({top:0,behavior:'smooth'});}
+document.querySelectorAll('.nav button').forEach(b=>b.addEventListener('click',()=>showTab(b.dataset.tab)));
+const ideasData={
+digital:[["Templates Notion","Vendre des modèles d'organisation pour un public précis."],["Kits de ressources","Créer des packs de fichiers, checklists ou supports pratiques."],["Mini-guides spécialisés","Rédiger un guide utile sur un problème que tu connais bien."]],
+service:[["Montage vidéo court","Proposer le montage de vidéos verticales à des créateurs ou commerces."],["Gestion de newsletters","Aider une petite entreprise à préparer et envoyer ses emails."],["Optimisation de fiches produits","Améliorer la clarté des descriptions pour des boutiques en ligne."]],
+commerce:[["Boutique de niche","Tester une petite gamme cohérente auprès d'une audience précise."],["Produits personnalisés","Étudier la demande pour des produits personnalisables."],["Curation spécialisée","Créer une sélection de produits autour d'un besoin précis."]],
+saas:[["Outil de réservation vertical","Simplifier la prise de rendez-vous pour un métier ciblé."],["Tableau de suivi simple","Aider une petite équipe à suivre une tâche répétitive."],["Générateur de documents","Automatiser la préparation de documents récurrents."]],
+content:[["Newsletter de niche","Publier des conseils réguliers sur un sujet précis."],["Compte éducatif","Créer des contenus courts qui répondent à des questions fréquentes."],["Bibliothèque de ressources","Organiser des ressources utiles pour une communauté."]]};
+function ideas(){let v=$('sector').value;let keys=v==='all'?Object.keys(ideasData):[v];let out=[];keys.forEach(k=>ideasData[k].forEach(x=>out.push(`<div class="idea"><b>${x[0]}</b>${x[1]}</div>`)));$('ideasResult').innerHTML=out.join('');}
+function num(id){let n=Number($(id).value);return Number.isFinite(n)&&n>=0?n:0}
+function euro(n){return n.toLocaleString('fr-FR',{style:'currency',currency:'EUR'})}
+function calculate(){let p=num('price'),c=num('cost'),q=Math.floor(num('quantity')),f=num('fixed'),rev=p*q,variable=c*q,margin=rev-variable,after=margin-f;$('profitResult').innerHTML=`<b>Chiffre d'affaires estimé</b><div class="money">${euro(rev)}</div><br>Coûts variables : <b>${euro(variable)}</b><br>Marge après coûts variables : <b>${euro(margin)}</b><br>Frais fixes : <b>${euro(f)}</b><br><br><b>Résultat estimé avant taxes et autres charges : ${euro(after)}</b>`;}
+function makePost(){let offer=$('offer').value.trim(),aud=$('audience').value.trim(),ben=$('benefit').value.trim(),plat=$('platform').value;if(!offer||!aud||!ben){$('postResult').textContent='Remplis les trois premiers champs pour créer une proposition.';return;}let text=`Tu es ${aud} et tu souhaites ${ben.toLowerCase()} ?\n\nDécouvre ${offer} : une solution pensée pour t'aider à avancer plus simplement.\n\nL'objectif : te faire gagner du temps et te permettre de te concentrer sur l'essentiel.\n\nTu veux en savoir plus ? Écris-moi en message privé.\n\n#entrepreneuriat #businessenligne #${plat.toLowerCase()}`;$('postResult').textContent=text;}
+function copyPost(){let t=$('postResult').innerText;if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(()=>alert('Texte copié !')).catch(()=>alert('Sélectionne le texte pour le copier.'));}else{alert('Appuie longuement sur le texte pour le copier.');}}
+function updateTasks(){let boxes=[...document.querySelectorAll('#tasks input')],done=boxes.filter(x=>x.checked).length,p=Math.round(done/boxes.length*100);$('progressText').textContent=p+'%';$('progressBar').style.width=p+'%';$('doneCount').textContent=done;localStorage.setItem('lpTasks',JSON.stringify(boxes.map(x=>x.checked)));}
+function resetTasks(){document.querySelectorAll('#tasks input').forEach(x=>x.checked=false);updateTasks();}
+try{let saved=JSON.parse(localStorage.getItem('lpTasks')||'null');if(saved)document.querySelectorAll('#tasks input').forEach((x,i)=>x.checked=!!saved[i]);}catch(e){}
+document.querySelectorAll('#tasks input').forEach(x=>x.addEventListener('change',updateTasks));updateTasks();$('projectCount').textContent='1';calculate();
+</script>
+</body></html>
